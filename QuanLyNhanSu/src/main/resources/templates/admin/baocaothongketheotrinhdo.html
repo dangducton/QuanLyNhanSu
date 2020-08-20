@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${trinhDo}"></title>
+<head th:replace="admin/layout :: head">
+<style>
+  .error {
+    color: red;
+  }
+</style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="admin/layout :: header"></nav>
+		<aside th:replace="admin/layout :: menu"></aside>
+		<div class="content-wrapper">
+		<br>
+    	<div class="card">
+        <div class="card-block">
+        <button class="btn btn-info float-left nBtn">Thêm mới</button>
+        <p class="text-success" th:if="${status != null}" th:text="${status}"></p>
+        <form class="form-inline ml-3 float-right">
+		        <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+		        <div class="input-group-append">
+		          <button class="btn btn-info float-right nBtn" type="submit">
+		            <i class="fas fa-search"></i>
+		          </button>
+		        </div>
+		    </form>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                	<th>STT</th>
+                    <th>Tên trình độ</th>
+                    <th>Hệ số chuyên môn</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="listTrinhDo,iterStat : ${listTrinhDo}">
+                	<td th:text="${iterStat.index + 1 + items}"></td>
+                    <td th:text="${listTrinhDo.tentrinhdo}"></td>
+                    <td th:text="${listTrinhDo.hesochuyenmon}"></td>
+                  
+                    <td th:text="${listTrinhDo.ghichu}"></td>
+                     <td>
+                     	<a class="btn btn-primary eBtn" th:href="@{/quantri/baocaonhanvientheotrinhdo/{id}(id=${listTrinhDo.id})}"><span class="glyphicon glyphicon-pencil"></span>Báo cáo nhân viên</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            	<div th:fragment='paginationbar'>
+				<div>
+					<ul class="pagination">
+						<li class="page-item" th:class="${page.firstPage}?'disabled':''"><span class="page-link"
+							th:if='${page.firstPage}'>← First</span> <a class="page-link"
+							th:if='${not page.firstPage}'
+							th:href='@{${page.url}(page=0,size=${page.size})}'>← First</a></li>
+						<li class="page-item" th:class="${page.hasPreviousPage}? '' : 'disabled'"><span class="page-link"
+							th:if='${not page.hasPreviousPage}'>«</span> <a class="page-link"
+							th:if='${page.hasPreviousPage}'
+							th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
+							title='Go to previous page'>«</a></li>
+						<li class="page-item" th:each='item : ${page.items}'
+							th:class="${item.current}? 'active' : ''"><span class="page-link"
+							th:if='${item.current}' th:text='${item.number}'>1</span> <a class="page-link"
+							th:if='${not item.current}'
+							th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
+								th:text='${item.number}'>1</span></a></li>
+						<li class="page-item" th:class="${page.hasNextPage}? '' : 'disabled'"><span class="page-link"
+							th:if='${not page.hasNextPage}'>»</span> <a class="page-link"
+							th:if='${page.hasNextPage}'
+							th:href='@{${page.url}(page=${page.number},size=${page.size})}'
+							title='Go to next page'>»</a></li>
+						<li class="page-item" th:class="${page.lastPage}? 'disabled' : ''"><span class="page-link"
+							th:if='${page.lastPage}'>Last →</span> <a class="page-link"
+							th:if='${not page.lastPage}'
+							th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last
+								→</a></li>
+					</ul>
+				</div>
+			</div>
+            <hr/>
+        </div>
+    </div>
+    
+
+    
+   
+
+    </div>
+		<footer th:replace="admin/layout :: footer"></footer>
+		<aside class="control-sidebar control-sidebar-dark">
+		</aside>
+	</div>
+	
+
+</body>
+</html>

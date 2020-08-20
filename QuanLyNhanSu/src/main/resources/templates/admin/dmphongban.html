@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${phongBan}"></title>
+<head th:replace="admin/layout :: head">
+<style>
+  .error {
+    color: red;
+  }
+</style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="admin/layout :: header"></nav>
+		<aside th:replace="admin/layout :: menu"></aside>
+		<div class="content-wrapper">
+		<br>
+    	<div class="card">
+        <div class="card-block">
+        <button class="btn btn-info float-left nBtn">Thêm mới</button>
+        <p class="text-success" th:if="${status != null}" th:text="${status}"></p>
+        <form class="form-inline ml-3 float-right">
+		        <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+		        <div class="input-group-append">
+		          <button class="btn btn-info float-right nBtn" type="submit">
+		            <i class="fas fa-search"></i>
+		          </button>
+		        </div>
+		    </form>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                	<th>STT</th>
+                    <th>Tên phòng ban</th>
+                    <th>Ngày thành lập</th>
+                    <th>Trạng thái</th>
+                    <th>Ghi chú</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="listPhongBan,iterStat : ${listPhongBan}">
+                	<td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${listPhongBan.tenphongban}"></td>
+                    <td th:text="${listPhongBan.ngaythanhlap}"></td>
+                    <td th:if="${listPhongBan.status} == 1"><small class="badge badge-primary"><i class="far fa-clock"></i>Hiển thị</small></td>
+                    <td th:if="${listPhongBan.status} == 0"><small class="badge badge-danger"><i class="far fa-clock"></i>Không hiển thị</small></td>
+                    <td th:text="${listPhongBan.ghichu}"></td>
+                     <td>
+                     	<a class="btn btn-primary eBtn" th:href="@{/quantri/findonephongban/(id=${listPhongBan.id})}"><span class="glyphicon glyphicon-pencil"></span>Sửa</a>
+                    </td>
+                    <td>
+                     	<a th:if="${listPhongBan.status} == 1" class="btn btn-danger activateBtn" th:href="@{/quantri/updateNotActivatePhongBan/{id}(id = ${listPhongBan.id})}">Không hiển thị</a>
+                     	<a th:if="${listPhongBan.status} == 0" class="btn btn-primary activateBtn" th:href="@{/quantri/updateActivatePhongBan/{id}(id = ${listPhongBan.id})}">Hiển thị</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr/>
+        </div>
+    </div>
+    
+    <div class="myForm">
+        <form action="#" id="second_form2" method="post" th:action="@{/quantri/updatePhongBan}">
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
+                 id="exampleModal" role="dialog"
+                 tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Cập nhật</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                    type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                         <div class="form-group">
+                               <input class="form-control" id="id" name="id" type="hidden" value=""/>
+                               <input class="form-control" id="status" name="status" type="hidden" value=""/>
+                            </div>
+                             <div class="form-group">
+                               <input class="form-control" id="trangthai" name="status" type="hidden" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="tenphongban">Tên phòng ban:</label>
+                                <input class="form-control" id="tenphongban" name="tenphongban" type="text" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="tenphongban">Ngày thành lập:</label>
+                                <input class="form-control" id="ngaythanhlap" name="ngaythanhlap" type="date" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="ghichu">Ghi chú:</label>
+                                <textarea class="form-control" id="ghichu" name="ghichu"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal"
+                                    type="button">Close
+                            </button>
+                            <input class="btn btn-primary" type="submit" value="Cập nhật"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+       <div class="myForm1">
+        <form action="#" id="second_form" method="post" th:action="@{/quantri/addPhongBan}">
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade"
+                 id="exampleModal1" role="dialog"
+                 tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Tạo mới</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                    type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                              <div class="form-group">
+                                <label class="col-form-label" for="tenphongban">Tên phòng ban:</label>
+                                <input class="form-control" id="tenphongban" name="tenphongban" type="text" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="ngaythanhlap">Ngày thành lập:</label>
+                                <input class="form-control" id="ngaythanhlap" name="ngaythanhlap" type="date" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="ghichu">Ghi chú:</label>
+                                <textarea class="form-control" id="ghichu" name="ghichu"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal"
+                                    type="button">Close
+                            </button>
+                            <input class="btn btn-primary" type="submit" value="Lưu"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="myModal"
+         role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Update Record</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal"
+                            type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger">
+                        Bạn có muốn update record này không?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal"
+                            type="button">Close
+                    </button>
+                    <a class="btn btn-danger" href="" id="updateRef">Sửa</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+		<footer th:replace="admin/layout :: footer"></footer>
+		<aside class="control-sidebar control-sidebar-dark">
+		</aside>
+	</div>
+	
+<script  src="../static/js/dmphongban.js" th:src="@{/js/dmphongban.js}"
+        type="text/javascript"></script>
+</body>
+</html>

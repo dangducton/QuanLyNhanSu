@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${phongBan}"></title>
+<head th:replace="admin/layout :: head">
+<style>
+  .error {
+    color: red;
+  }
+</style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="admin/layout :: header"></nav>
+		<aside th:replace="admin/layout :: menu"></aside>
+		<div class="content-wrapper">
+		<br>
+    	<div class="card">
+        <div class="card-block">
+        <button class="btn btn-info float-left nBtn">Thêm mới</button>
+        <p class="text-success" th:if="${status != null}" th:text="${status}"></p>
+        <form class="form-inline ml-3 float-right">
+		        <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+		        <div class="input-group-append">
+		          <button class="btn btn-info float-right nBtn" type="submit">
+		            <i class="fas fa-search"></i>
+		          </button>
+		        </div>
+		    </form>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                	<th>STT</th>
+                    <th>Tên phòng ban</th>
+                    <th>Ngày thành lập</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="listPhongBan,iterStat : ${listPhongBan}">
+                	<td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${listPhongBan.tenphongban}"></td>
+                    <td th:text="${listPhongBan.ngaythanhlap}"></td>
+                     <td>
+                     	<a class="btn btn-primary" th:href="@{/quantri/baocaonhanvientheophongban/{id}(id=${listPhongBan.id})}"><span class="glyphicon glyphicon-pencil"></span>Thông kê nhân viên</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr/>
+        </div>
+    </div>
+    
+
+    </div>
+		<footer th:replace="admin/layout :: footer"></footer>
+		<aside class="control-sidebar control-sidebar-dark">
+		</aside>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="utf-8" />
+<title th:text="${title}"></title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" th:href="@{/login/images/icons/favicon.ico}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/login/vendor/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/vendor/animate/animate.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/vendor/css-hamburgers/hamburgers.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/vendor/animsition/css/animsition.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/vendor/select2/select2.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/vendor/daterangepicker/daterangepicker.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/css/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/login/css/main.css}">
+</head>
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" th:action="@{'/register'}" th:object="${nguoiDungSignUpDTO}" method="post">
+				   <h4 style="text-align:center;color:red" th:if="${errormessage !=''}" th:text="${errormessage}"></h4>
+					<span class="login100-form-title p-b-43">
+						Đăng ký tài khoản
+					</span>
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="text" name="hoten" th:field="*{tendangnhap}"/>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Nhập họ tên</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password" th:field="*{password}"/>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Nhập mật khẩu</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="confirmpassword" th:field="*{confirmpassword}"/>
+						<span class="focus-input100"></span>
+						<span class="label-input100">Nhập lại mật khẩu</span>
+					</div>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Đăng ký
+						</button>
+					</div>
+					<div class="text-center p-t-46 p-b-20">
+						<span class="txt2">
+							hoặc đăng ký bằng tài khoản
+						</span>
+					</div>
+					<div class="login100-form-social flex-c-m">
+						<a th:href="${'/facebooklogin'}" class="login100-form-social-item flex-c-m bg1 m-r-5">
+							<i class="fa fa-facebook-f" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+				<div class="login100-more" style="background-image: url('/login/images/bg-01.jpg');">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script  th:src="@{/login/vendor/jquery/jquery-3.2.1.min.js}" type="text/javascript"></script>
+	<script th:src="@{/login/vendor/animsition/js/animsition.min.js}" type="text/javascript"></script>
+	<script th:src="@{/login/vendor/bootstrap/js/popper.js}" type="text/javascript"></script>
+	<script th:src="@{/login/vendor/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+	<script th:src="@{/login/vendor/select2/select2.min.js}" type="text/javascript"></script>
+	<script th:src="@{/login/vendor/daterangepicker/moment.min.js}" type="text/javascript"></script>
+	<script th:src="@{/login/vendor/daterangepicker/daterangepicker.js}" type="text/javascript"></script>
+	<script th:src="@{/login/vendor/countdowntime/countdowntime.js}" type="text/javascript"></script>
+	<script th:src="@{/login/js/main.js}" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${themNhanVien}"></title>
+<head th:replace="admin/layout :: head">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="admin/layout :: header"></nav>
+		<aside th:replace="admin/layout :: menu"></aside>
+		<div class="content-wrapper">
+			<form id="second_form" th:action="@{/quantri/themmoiquyetdinhkyluat}"
+				method="post" enctype="multipart/form-data">
+				<h3 class="modal-title">Thêm quyết định kỷ luật</h3>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="hodem">Họ đệm:</label> <input type="text"
+							class="form-control" id="hodem" th:name="hodem"
+							th:value="${thongTinNhanVien.hodem}" disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ten">Tên:</label> <input type="text"
+							class="form-control" id="ten" th:name="ten"
+							th:value="${thongTinNhanVien.ten}" disabled>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Ngày sinh:</label> <input type="date"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${thongTinNhanVien.ngaysinh}" disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="">Giới tính</label>
+						<div th:if="${thongTinNhanVien.gioitinh} == 1">
+							<input type="radio" th:name="gioitinh" id="gioitinh" value="1"
+								checked="checked" disabled> <label class="radio-inline"
+								for="nam">Nam</label> <input type="radio" th:name="gioitinh"
+								id="gioitinh" value="2"> <label class="radio-inline"
+								for="nu" disabled>Nữ</label>
+						</div>
+						<div th:if="${thongTinNhanVien.gioitinh} == 2">
+							<input type="radio" th:name="gioitinh" id="gioitinh" value="1"
+								checked="checked" disabled> <label class="radio-inline"
+								for="nam">Nam</label> <input type="radio" th:name="gioitinh"
+								id="gioitinh" value="2" disabled> <label
+								class="radio-inline" for="nu">Nữ</label>
+						</div>
+					</div>
+					<div class="form-group col-md-4">
+						<img id="myImage"
+							th:src="@{${'/upload/' + thongTinNhanVien.hinhanh}}"
+							style="border: 1px; width: 100px; height: 100px" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="noisinh">Nơi sinh:</label> <input type="text"
+						class="form-control" id="noisinh" th:name="noisinh"
+						th:value="${thongTinNhanVien.noisinh}" disabled />
+				</div>
+				<div class="form-group">
+					<label for="diachihientai">Địa chỉ hiện tại:</label> <input
+						type="text" class="form-control" id="diachihientai"
+						th:name="diachihientai"
+						th:value="${thongTinNhanVien.diachihientai}" disabled />
+				</div>
+
+				<div class="form-group">
+					<label for="diachithuongchu">Địa chỉ thường trú:</label> <input
+						type="text" class="form-control" id="diachithuongchu"
+						th:name="diachithuongchu"
+						th:value="${thongTinNhanVien.diachithuongtru}" disabled />
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="quoctich">Quốc tịch:</label> <input type="text"
+							class="form-control" id="quoctich" th:name="quoctich"
+							th:value="${thongTinNhanVien.quoctich}" disabled />
+					</div>
+					<div class="form-group col-md-6">
+						<label for="sodienthoai">Số điện thoại:</label> <input type="text"
+							class="form-control" id="sodienthoai" th:name="sodienthoai"
+							th:value="${thongTinNhanVien.sodienthoai}" disabled /> <input
+							type="hidden" id="id" th:name="id"
+							th:value="${thongTinNhanVien.id}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="email">Email:</label> <input type="text"
+							class="form-control" id="email" th:name="email"
+							th:value="${thongTinNhanVien.email}" disabled />
+					</div>
+
+					<div class="form-group col-md-6">
+						<label for="chungminhnhandan">Số chứng minh nhân dân:</label> <input
+							type="number" class="form-control" id="chungminhnhandan"
+							th:name="chungminhnhandan" th:value="${thongTinNhanVien.cmnd}"
+							disabled />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="thongtin">Nơi cấp:</label> <input type="text"
+						class="form-control" id="noicap" th:name="noicap"
+						th:value="${thongTinNhanVien.noicapcmnd}" disabled />
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="chucvu">Chức vụ</label> <select class="form-control"
+							id="chucvu" th:name="chucvu" disabled>
+							<option selected th:value="${thongTinNhanVien.idChucdanh.id}"
+								th:utext="${thongTinNhanVien.idChucdanh.tenchucdanh}"></option>
+							<option th:each="chucVu : ${chucVu}" th:value="${chucVu.id}"
+								th:utext="${chucVu.tenchucdanh}"></option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="phongbanId">Phòng ban</label> <select
+							class="form-control" id="phongban" th:name="phongban" disabled>
+							<option selected th:value="${thongTinNhanVien.idPhongban.id}"
+								th:utext="${thongTinNhanVien.idPhongban.tenphongban}"></option>
+							<option th:each="phongBan : ${phongBan}"
+								th:value="${phongBan.id}" th:utext="${phongBan.tenphongban}"></option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="trinhdohocvan">Học vấn</label> <select
+							class="form-control" id="trinhdohocvan" th:name="trinhdohocvan"
+							disabled>
+							<option selected th:value="${thongTinNhanVien.idTrinhdo.id}"
+								th:utext="${thongTinNhanVien.idTrinhdo.tentrinhdo}"></option>
+							<option th:each="trinhDo : ${trinhDo}" th:value="${trinhDo.id}"
+								th:utext="${trinhDo.tentrinhdo}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="trinhdohocvan">Chuyên ngành</label> <select
+							class="form-control" id="chuyennganh" th:name="chuyennganh"
+							disabled>
+							<option selected th:value="${thongTinNhanVien.idChuyennganh.id}"
+								th:utext="${thongTinNhanVien.idChuyennganh.tenchuyennganh}"></option>
+							<option th:each="chuyenNganh : ${chuyenNganh}"
+								th:value="${chuyenNganh.id}"
+								th:utext="${chuyenNganh.tenchuyennganh}"></option>
+						</select>
+					</div>
+
+					<div class="form-group col-md-4">
+						<label for="trinhdohocvan">Dân tộc</label> <select
+							class="form-control" id="dantoc" th:name="dantoc" disabled>
+							<option selected th:value="${thongTinNhanVien.idDantoc.id}"
+								th:utext="${thongTinNhanVien.idDantoc.tendantoc}"></option>
+							<option th:each="danToc : ${danToc}" th:value="${danToc.id}"
+								th:utext="${danToc.tendantoc}"></option>
+						</select>
+					</div>
+
+					<div class="form-group col-md-4">
+						<label for="trinhdohocvan">Tình trạng hôn nhân</label> <select
+							class="form-control" id="tinhtranghonnhan"
+							th:name="tinhtranghonnhan" disabled>
+							<option selected
+								th:value="${thongTinNhanVien.idTinhtranghonnhan.id}"
+								th:utext="${thongTinNhanVien.idTinhtranghonnhan.tentinhtranghonnhan}"></option>
+							<option th:each="tinhTrangHonNhan : ${tinhTrangHonNhan}"
+								th:value="${tinhTrangHonNhan.id}"
+								th:utext="${tinhTrangHonNhan.tentinhtranghonnhan}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="trinhdohocvan">Tôn giáo</label> <select
+							class="form-control" id="tongiao" th:name="tongiao" disabled>
+							<option selected th:value="${thongTinNhanVien.idTongiao.id}"
+								th:utext="${thongTinNhanVien.idTongiao.tentongiao}"></option>
+							<option th:each="tonGiao : ${tonGiao}" th:value="${tonGiao.id}"
+								th:utext="${tonGiao.tentongiao}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-row">
+				<div class="form-group col-md-6">
+						<label for="ngaysinh">Tên quyết định:</label> <input
+							type="text" class="form-control" id="tenquyetdinh" name="tenquyetdinh"
+							value="">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="ngaysinh">Ngày có hiệu lực kỷ luật:</label> <input
+							type="date" class="form-control" id="hieuluc" name="hieuluc"
+							value="">
+					</div>
+				</div>
+					<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="trinhdohocvan">Kỷ luật</label> <select
+							class="form-control" id="kyluat" th:name="kyluat">
+							<option value="">Chọn hình thức kỷ luật</option>
+							<option th:each="kyLuat : ${kyLuat}" th:value="${kyLuat.id}"
+								th:utext="${kyLuat.tenkyluat}"></option>
+						</select>
+					</div>
+				</div>
+					<div class="form-group">
+					<label for="thongtin">Nội dung:</label> <input type="text"
+						class="form-control" id="noidung" name="noidung"
+						value="" />
+				</div>
+					<div class="form-group">
+					<label for="thongtin">Ghi chú:</label> <input type="text"
+						class="form-control" id="ghichu" name="ghichu"
+						value="" />
+				</div>
+
+				<button type="submit" class="btn btn-primary">Thêm quyết định kỷ luật</button>
+			</form>
+			<script>
+  $('#second_form').validate({
+	  rules: {
+		  kyluat: {
+		      required: true
+		},
+		  tenquyetdinh: {
+		      required: true
+		},
+		hieuluc: {
+		      required: true
+		},
+		noidung: {
+		      required: true
+		},
+		hodem: {
+		      required: true
+		},
+		ten: {
+		      required: true
+	    },
+	    diachihientai: {
+		      required: true
+	    },
+	    diachithuongchu: {
+		      required: true
+	    },
+	    noisinh: {
+		      required: true
+	    },
+		quoctich: {
+		      required: true
+	    },
+	    ngaysinh: {
+		      required: true
+	    },
+	    chungminhnhandan: {
+		      required: true
+	    },
+	    noicap: {
+		      required: true
+	    },
+	    email: {
+		      required: true
+	    },
+	    chucvu: {
+		      required: true
+	    },
+	    phongban: {
+		      required: true
+	    },
+	    chuyennganh: {
+		      required: true
+	    },
+	    tinhtranghonnhan: {
+		      required: true
+	    },
+	    tongiao: {
+		      required: true
+	    },
+	    dantoc: {
+		      required: true
+	    },
+	    trinhdohocvan: {
+		      required: true
+	    }
+	  },
+	  messages: {
+		  kyluat: {
+		      required: 'Yêu cầu chọn hình thức kỷ luật'
+		},
+		  tenquyetdinh: {
+		      required: 'Yêu cầu nhập tên quyết định'
+		},
+		hieuluc: {
+		      required: 'Yêu cầu nhập ngày tháng'
+		},
+		noidung: {
+		      required: 'Yêu cầu nhập nội dung'
+		},
+			hodem: {
+			      required: 'Yêu cầu nhập đầy đủ họ đệm'
+			},
+			ten: {
+			      required: 'Yêu cầu nhập tên'
+		    },
+		    diachihientai: {
+			      required: 'Yêu cầu nhập địa chỉ hiện tại'
+		    },
+		    diachithuongchu: {
+			      required: 'Yêu cầu nhập địa chỉ thường chú'
+		    },
+		    noisinh: {
+			      required: 'Yêu cầu nhập nơi sinh'
+		    },
+			quoctich: {
+			      required: 'Yêu cầu nhập quốc tịch'
+		    },
+		    ngaysinh: {
+			      required: 'Yêu cầu nhập ngày sinh'
+		    },
+		    chungminhnhandan: {
+			      required: 'Yêu cầu nhập số chứng minh nhân dân'
+		    },
+		    noicap: {
+			      required: 'Yêu cầu nhập nơi cấp'
+		    },
+		    email: {
+			      required: 'Yêu cầu nhập Email'
+		    },
+		    chucvu: {
+			      required: 'Yêu cầu chọn chức vụ'
+		    },
+		    phongban: {
+			      required: 'Yêu cầu chọn phòng ban'
+		    },
+		    chuyennganh: {
+			      required: 'Yêu cầu chọn chuyên ngành'
+		    },
+		    tinhtranghonnhan: {
+			      required: 'Yêu cầu chọn tình trạng hôn nhân'
+		    },
+		    tongiao: {
+			      required: 'Yêu cầu chọn tôn giáo'
+		    },
+		    dantoc: {
+			      required: 'Yêu cầu chọn dân tộc'
+		    },
+		    trinhdohocvan: {
+			      required: 'Yêu cầu chọn trình độ học vấn'
+		    }
+	  },
+	  submitHandler: function(form) {
+	    form.submit();
+	  }
+	});
+</script>
+			<script>
+var canvas = document.createElement("canvas");
+var ctx = canvas.getContext("2d");
+var imageData;
+document.getElementById('myFile').onchange = function (evt) {
+    var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+    // FileReader support
+    if (FileReader && files && files.length) {
+        var fr = new FileReader();
+        fr.onload = () => showImage(fr);
+        fr.readAsDataURL(files[0]);
+    }
+}
+
+function showImage(fileReader) {
+    var img = document.getElementById("myImage");
+    img.onload = () => getImageData(img);
+    img.src = fileReader.result;
+}
+
+function getImageData(img) {
+    ctx.drawImage(img, 0, 0);
+    imageData = ctx.getImageData(0, 0, img.width, img.height).data;
+    console.log("image data:", imageData);
+}
+</script>
+		</div>
+		<footer th:replace="admin/layout :: footer"></footer>
+		<aside class="control-sidebar control-sidebar-dark"></aside>
+	</div>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${themNhanVien}"></title>
+<head th:replace="admin/layout :: head">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="admin/layout :: header"></nav>
+		<aside th:replace="admin/layout :: menu"></aside>
+		<div class="content-wrapper">
+			<form id="second_form" th:action="@{/quantri/thembangluong}"
+				method="post" enctype="multipart/form-data">
+				<h3 class="modal-title">Thêm bảng lương</h3>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="hodem">Họ đệm:</label> <input type="text"
+							class="form-control" id="hodem" th:name="hodem"
+							th:value="${thongTinNhanVien.hodem}" disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ten">Tên:</label> <input type="text"
+							class="form-control" id="ten" th:name="ten"
+							th:value="${thongTinNhanVien.ten}" disabled>
+							<input
+							type="hidden" id="id" th:name="id"
+							th:value="${thongTinNhanVien.id}">
+							<input
+							type="hidden" id="thang" th:name="thang"
+							th:value="${thang}">
+							<input
+							type="hidden" id="nam" th:name="nam"
+							th:value="${nam}">
+							<input
+							type="hidden" id="thuongngayle" th:name="thuongngayle"
+							th:value="${thuongngayle}">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Hệ số chức vụ:</label> <input type="number"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${thongTinNhanVien.idChucdanh.hesochucvu}" disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Hệ số chuyên môn:</label> <input type="number"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${thongTinNhanVien.idTrinhdo.hesochuyenmon}" disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<img id="myImage"
+							th:src="@{${'/upload/' + thongTinNhanVien.hinhanh}}"
+							style="border: 1px; width: 100px; height: 100px" />
+					</div>
+				</div>
+					<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Hệ số trách nhiệm:</label> <input type="number"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${thongTinNhanVien.idChucdanh.hesotrachnhiem}" disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Mức lương cơ bản:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(thongTinNhanVien.idChucdanh.luongcoban,3,'POINT',0,'COMMA') +' đ'}"  disabled>
+					</div>
+				<div class="form-group col-md-4">
+						<label for="ngaysinh">Tiền bảo hiểm:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(tienbaohiem,3,'POINT',0,'COMMA') +' đ'}" disabled>
+					</div>
+				</div>
+					<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Tiền phạt:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(tienkyluat,3,'POINT',0,'COMMA') +' đ'}"  disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Tiền thưởng:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(tienkhenthuong,3,'POINT',0,'COMMA') +' đ'}"  disabled>
+					</div>
+				<div class="form-group col-md-4">
+						<label for="ngaysinh">Tiền thưởng ngày lễ:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(tienthuongngayle,3,'POINT',0,'COMMA') +' đ'}"  disabled>
+					</div>
+				</div>
+					<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Tiền tạm ứng:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(tientamung,3,'POINT',0,'COMMA') +' đ'}"  disabled>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="ngaysinh">Tiền phụ cấp:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(tienphucap,3,'POINT',0,'COMMA') +' đ'}"  disabled>
+					</div>
+				<div class="form-group col-md-4">
+						<label for="ngaysinh">Tổng thực lĩnh:</label> <input type="text"
+							class="form-control" id="ngaysinh" th:name="ngaysinh"
+							th:value="${#numbers.formatDecimal(tongtien,3,'POINT',0,'COMMA') +' đ'}" disabled>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="thongtin">Ghi chú:</label> <input type="text"
+						class="form-control" id="ghichu" name="ghichu"
+						value="" />
+				</div>
+				<button type="submit" class="btn btn-primary">Tạo bảng lương</button>
+			</form>
+			<script>
+  $('#second_form').validate({
+	  rules: {
+		  phucap: {
+		      required: true
+		},
+		nam: {
+		      required: true
+		},
+		thang: {
+		      required: true
+		},
+		noidung: {
+		      required: true
+		},
+		hodem: {
+		      required: true
+		},
+		ten: {
+		      required: true
+	    },
+	    diachihientai: {
+		      required: true
+	    },
+	    diachithuongchu: {
+		      required: true
+	    },
+	    noisinh: {
+		      required: true
+	    },
+		quoctich: {
+		      required: true
+	    },
+	    ngaysinh: {
+		      required: true
+	    },
+	    chungminhnhandan: {
+		      required: true
+	    },
+	    noicap: {
+		      required: true
+	    },
+	    email: {
+		      required: true
+	    },
+	    chucvu: {
+		      required: true
+	    },
+	    phongban: {
+		      required: true
+	    },
+	    chuyennganh: {
+		      required: true
+	    },
+	    tinhtranghonnhan: {
+		      required: true
+	    },
+	    tongiao: {
+		      required: true
+	    },
+	    dantoc: {
+		      required: true
+	    },
+	    trinhdohocvan: {
+		      required: true
+	    }
+	  },
+	  messages: {
+		  phucap: {
+		      required: 'Yêu cầu chọn hình thức phụ cấp'
+		},
+		  nam: {
+		      required: 'Yêu cầu chọn năm'
+		},
+		thang: {
+		      required: 'Yêu cầu chọn tháng'
+		},
+		noidung: {
+		      required: 'Yêu cầu nhập nội dung'
+		},
+			hodem: {
+			      required: 'Yêu cầu nhập đầy đủ họ đệm'
+			},
+			ten: {
+			      required: 'Yêu cầu nhập tên'
+		    },
+		    diachihientai: {
+			      required: 'Yêu cầu nhập địa chỉ hiện tại'
+		    },
+		    diachithuongchu: {
+			      required: 'Yêu cầu nhập địa chỉ thường chú'
+		    },
+		    noisinh: {
+			      required: 'Yêu cầu nhập nơi sinh'
+		    },
+			quoctich: {
+			      required: 'Yêu cầu nhập quốc tịch'
+		    },
+		    ngaysinh: {
+			      required: 'Yêu cầu nhập ngày sinh'
+		    },
+		    chungminhnhandan: {
+			      required: 'Yêu cầu nhập số chứng minh nhân dân'
+		    },
+		    noicap: {
+			      required: 'Yêu cầu nhập nơi cấp'
+		    },
+		    email: {
+			      required: 'Yêu cầu nhập Email'
+		    },
+		    chucvu: {
+			      required: 'Yêu cầu chọn chức vụ'
+		    },
+		    phongban: {
+			      required: 'Yêu cầu chọn phòng ban'
+		    },
+		    chuyennganh: {
+			      required: 'Yêu cầu chọn chuyên ngành'
+		    },
+		    tinhtranghonnhan: {
+			      required: 'Yêu cầu chọn tình trạng hôn nhân'
+		    },
+		    tongiao: {
+			      required: 'Yêu cầu chọn tôn giáo'
+		    },
+		    dantoc: {
+			      required: 'Yêu cầu chọn dân tộc'
+		    },
+		    trinhdohocvan: {
+			      required: 'Yêu cầu chọn trình độ học vấn'
+		    }
+	  },
+	  submitHandler: function(form) {
+	    form.submit();
+	  }
+	});
+</script>
+			<script>
+var canvas = document.createElement("canvas");
+var ctx = canvas.getContext("2d");
+var imageData;
+document.getElementById('myFile').onchange = function (evt) {
+    var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+    // FileReader support
+    if (FileReader && files && files.length) {
+        var fr = new FileReader();
+        fr.onload = () => showImage(fr);
+        fr.readAsDataURL(files[0]);
+    }
+}
+
+function showImage(fileReader) {
+    var img = document.getElementById("myImage");
+    img.onload = () => getImageData(img);
+    img.src = fileReader.result;
+}
+
+function getImageData(img) {
+    ctx.drawImage(img, 0, 0);
+    imageData = ctx.getImageData(0, 0, img.width, img.height).data;
+    console.log("image data:", imageData);
+}
+</script>
+		</div>
+		<footer th:replace="admin/layout :: footer"></footer>
+		<aside class="control-sidebar control-sidebar-dark"></aside>
+	</div>
+</body>
+</html>

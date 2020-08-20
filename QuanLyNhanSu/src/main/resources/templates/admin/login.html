@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Quản lý nhân sự, tiền lương</title>
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bower_components/AdminLTE.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic}">
+
+<style type="text/css">
+.mt20 {
+	margin-top: 20px;
+}
+
+.result {
+	font-size: 20px;
+}
+
+.bold {
+	font-weight: bold;
+}
+</style>
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/bower_components/moment/moment.js}"></script>
+</head>
+<body class="hold-transition login-page">
+	<div class="login-box">
+		<div class="login-logo">
+			<b>Quản lý nhân sự, tiền lương</b>
+		</div>
+		<div class="login-box-body">
+			<div class="login-logo">
+				<p id="date"></p>
+				<p id="time" class="bold"></p>
+			</div>
+			<p class="login-box-msg">Đăng nhập để bắt đầu làm việc</p>
+			<form class="login100-form validate-form" th:action="@{'/login'}"
+				method="post">
+				<h4 style="text-align: center; color: red"
+					th:if="${errormessage !=''}" th:text="${errormessage}"></h4>
+				<div class="form-group">
+				<label for="exampleInputEmail1">Tên tài khoản</label>
+					<input class="form-control" type="text" name="email"> 
+				</div>
+
+
+				<div class="form-group">
+				<label for="exampleInputEmail1">Mật khẩu</label>
+					<input class="form-control" type="password" name="password">
+				</div>
+				<div class="container-login100-form-btn">
+					<button class="btn btn-info ">Đăng nhập</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			var interval = setInterval(function() {
+				var momentNow = moment();
+				$('#date').html(
+						momentNow.format('dddd').substring(0, 3).toUpperCase()
+								+ ' - ' + momentNow.format('MMMM DD, YYYY'));
+				$('#time').html(momentNow.format('hh:mm:ss A'));
+			}, 100);
+		});
+	</script>
+	<script>
+		var time2 = document.getElementById('time2');
+		var timepicker = new TimePicker([ 'time', 'link' ], {
+			lang : 'en',
+			theme : 'blue-grey',
+		});
+		timepicker.on('change', function(evt) {
+			var value = (evt.hour || '00') + ':' + (evt.minute || '00');
+
+			if (evt.element.id === 'link') {
+				time2.value = value;
+			} else {
+				evt.element.value = value;
+			}
+		});
+	</script>
+</body>
+</html>

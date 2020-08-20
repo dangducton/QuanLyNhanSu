@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title th:text="${title}"></title>
+<head th:replace="admin/layout :: head">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<nav th:replace="admin/layout :: header"></nav>
+		<aside th:replace="admin/layout :: menu"></aside>
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 text-dark">Thống kê</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box">
+								<span class="info-box-icon bg-info"><i
+									class="far fa-envelope"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Tổng số nhân viên</span> <span
+										class="info-box-number" th:text="${soNhanVien}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box">
+								<span class="info-box-icon bg-warning"><i
+									class="far fa-copy"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Tổng số quản trị</span> <span
+										class="info-box-number" th:text="${soQuanTri}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box">
+								<span class="info-box-icon bg-success"><i
+									class="far fa-flag"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Tổng số phòng ban</span> <span
+										class="info-box-number" th:text="${soPhongBan}"></span>
+								</div>
+							</div>
+						</div>
+							<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box">
+								<span class="info-box-icon bg-success"><i
+									class="far fa-flag"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Tổng số chức danh</span> <span
+										class="info-box-number" th:text="${soChucDanh}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-info">
+								<span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Quyết định khen thưởng</span> <span
+										class="info-box-number" th:text="${soQuyetDinhKhenThuong}">12</span>
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description"> </span>
+									<a href="/quantri/findallquyetdinhkhenthuong" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-success">
+								<span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Quyết định kỷ luật</span> <span
+										class="info-box-number" th:text="${soQuyetDinhKyLuat}"></span>
+
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description">  </span>
+										<a href="/quantri/findallquyetdinhkyluat" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-warning">
+								<span class="info-box-icon"><i
+									class="far fa-calendar-alt"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Quyết định nâng hệ số chuyên môn</span> <span
+										class="info-box-number"
+										th:text="${soQuyetDinhNangHeSoChuyenMon}"></span>
+
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description">  </span>
+										<a href="/quantri/findallquyetdinhnanghesochuyenmon" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-danger">
+								<span class="info-box-icon"><i class="fas fa-comments"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Quyết định thăng chức</span> <span
+										class="info-box-number"
+										th:text="${soQuyetDinhThangChuc}"></span>
+
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description"> </span>
+										<a href="/quantri/findallquyetdinhthangchuc" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-gradient-info">
+								<span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Quyết định chấm dứt hợp đồng</span> <span
+										class="info-box-number"
+										th:text="${soQuyetDinhChamDutHopDong}"></span>
+
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description"> </span>
+										<a href="/quantri/findallquyetdinhchamduthopdong" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+					</div>
+							<div class="row">
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-success">
+								<span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Tổng tiền tạm ứng</span> <span
+										class="info-box-number"
+										th:text="${#numbers.formatDecimal(tongTienTamUng,3,'POINT',0,'COMMA') +' đ'}"></span>
+
+
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description">  </span>
+										<a href="/quantri/findalltamung" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-warning">
+								<span class="info-box-icon"><i
+									class="far fa-calendar-alt"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Tổng tiền phụ cấp</span> <span
+										class="info-box-number"
+										th:text="${#numbers.formatDecimal(tongTienPhuCap,3,'POINT',0,'COMMA') +' đ'}"></span>
+
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description">  </span>
+										<a href="/quantri/findallphucapnhanvien" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+							<div class="info-box bg-danger">
+								<span class="info-box-icon"><i class="fas fa-comments"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Tổng tiền lương</span> <span
+										class="info-box-number"
+										th:text="${#numbers.formatDecimal(tongTienLuong,3,'POINT',0,'COMMA') +' đ'}"></span>
+
+									<div class="progress">
+										<div class="progress-bar" style="width: 70%"></div>
+									</div>
+									<span class="progress-description"> </span>
+										<a href="/quantri/findallbangluong" class="small-box-footer" style="color:black"> Xem thêm <i
+									class="fas fa-arrow-circle-right"></i>
+								</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer th:replace="admin/layout :: footer"></footer>
+		<aside class="control-sidebar control-sidebar-dark">
+		</aside>
+	</div>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/fontawesome-free/css/all.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/jqvmap/jqvmap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/dist/css/adminlte.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/overlayScrollbars/css/OverlayScrollbars.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/daterangepicker/daterangepicker.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/plugins/summernote/summernote-bs4.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/validation.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+	th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700}" />
+<script th:src="@{/plugins/jquery/jquery.min.js}" type="text/javascript"></script>
+<script th:src="@{/plugins/jquery-ui/jquery-ui.min.js}"
+	type="text/javascript"></script>
+<script>
+	$.widget.bridge('uibutton', $.ui.button)
+</script>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"
+	type="text/javascript"></script>
+<script
+	th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js}"
+	type="text/javascript"></script>
+<script
+	th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/plugins/chart.js/Chart.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/plugins/sparklines/sparkline.js}"
+	type="text/javascript"></script>
+<script th:src="@{/plugins/jqvmap/jquery.vmap.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/plugins/jqvmap/maps/jquery.vmap.world.js}"
+	type="text/javascript"></script>
+<script th:src="@{/plugins/jquery-knob/jquery.knob.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/plugins/moment/moment.min.js}" type="text/javascript"></script>
+<script th:src="@{/plugins/daterangepicker/daterangepicker.js}"
+	type="text/javascript"></script>
+<script
+	th:src="@{/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/plugins/summernote/summernote-bs4.min.js}"
+	type="text/javascript"></script>
+<script
+	th:src="@{/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"
+	type="text/javascript"></script>
+<script th:src="@{/dist/js/adminlte.js}" type="text/javascript"></script>
+<script th:src="@{/dist/js/pages/dashboard.js}" type="text/javascript"></script>
+<script th:src="@{/dist/js/demo.js}" type="text/javascript"></script>
+<script
+	th:src="@{https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js}"
+	type="text/javascript"></script>
+<script
+	th:src="@{https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js}"
+	type="text/javascript"></script>
+
+</head>
+<body>
+	<nav th:fragment="header"
+		class="main-header navbar navbar-expand navbar-white navbar-light">
+		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+				href="#"><i class="fas fa-bars"></i></a></li>
+			<li class="nav-item d-none d-sm-inline-block"><a href="/quantri"
+				class="nav-link">Trang chủ</a></li>
+		</ul>
+		<ul class="navbar-nav ml-auto">
+
+			<form class="form-inline" action="#" th:action="@{/logout}"
+				method="POST">
+				<button class="btn btn-info" type="submit">Đăng xuất</button>
+			</form>
+		</ul>
+	</nav>
+	<aside th:fragment="menu"
+		class="main-sidebar sidebar-dark-primary elevation-4">
+		<a href="/" class="brand-link"><span
+			class="brand-text font-weight-light"><h4>Quản lý nhân sự, tiền
+				lương</h4></span>
+		</a>
+		<div class="sidebar">
+			<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+				<div class="image">
+					<img th:src="@{'/upload/' +${anhNguoiDung}}"
+						class="img-circle elevation-2" width="150" height="150">
+				</div>
+				<div class="info">
+					<a href="#" class="d-block" th:text="'Xin chào ' + ${tenNguoiDung}"></a>
+				</div>
+			</div>
+			<nav class="mt-2">
+				<ul class="nav nav-pills nav-sidebar flex-column"
+					data-widget="treeview" role="menu" data-accordion="false">
+					<li class="nav-item has-treeview"><a href="" class="nav-link">
+							<i class="nav-icon fas fa-edit"></i>
+							<p>
+								Quản lý hệ thống <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="/admin/danhsachquantri"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh sách quản trị viên</p>
+							</a></li>
+							<li class="nav-item"><a href="/admin/themnhanvienquantri"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Thêm mới quản trị viên</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item has-treeview">
+					<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-chart-pie"></i>
+							<p>
+								Danh sách danh mục<i class="right fas fa-angle-left"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="/quantri/findallchitietthuongle"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục chi tiết thưởng lễ</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallchucdanh"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục chức danh</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallchuyennganh"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục chuyên ngành</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findalldantoc"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục dân tộc</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallkyluat"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục kỷ luật</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallphongban"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục phòng ban</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallphucap"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục phụ cấp</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallquanhe"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục quan hệ</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallthuongngayle"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục thưởng ngày lễ</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findalltinhtranghonnhan"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục tình trạng hôn nhân</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findalltongiao"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục tôn giáo</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findalltrinhdo"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh mục trình độ học vấn</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item has-treeview"><a href="" class="nav-link">
+							<i class="nav-icon fas fa-edit"></i>
+							<p>
+								Quản lý nhân viên <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="/quantri/listnhanvien"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Danh sách nhân viên</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/initthemnhanvien"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Thêm nhân viên</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/listquanhe" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Quan hệ gia đình</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallquatrinhcongtac"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Quá trình công tác</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item has-treeview"><a href="" class="nav-link">
+							<i class="nav-icon fas fa-edit"></i>
+							<p>
+								Quản lý các quyết định<i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a
+								href="/quantri/findallquyetdinhchamduthopdong" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Quyết định chấm dứt hợp đồng</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallquyetdinhkhenthuong"
+								class="nav-link"><i class="far fa-circle nav-icon"></i>
+									<p>Quyết định khen thưởng</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallquyetdinhkyluat"
+								class="nav-link"><i class="far fa-circle nav-icon"></i>
+									<p>Quyết định kỷ luật</p>
+							</a></li>
+							<li class="nav-item"><a
+								href="/quantri/findallquyetdinhnanghesochuyenmon" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Quyết định nâng hệ số lương</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallquyetdinhthangchuc"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Quyết định thăng chức</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item has-treeview"><a href="" class="nav-link">
+							<i class="nav-icon fas fa-edit"></i>
+							<p>
+								Báo cáo thống kê <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a
+								href="/quantri/initbaocaothongkekyluat" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Quyết định kỷ luật</p>
+							</a></li>
+								<li class="nav-item"><a
+								href="/quantri/initbaocaothongkekhenthuong" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Quyết định khen thưởng</p>
+							</a></li>
+								<li class="nav-item"><a
+								href="/quantri/baocaothongkenhanvientoanbonhanvien" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Toàn bộ nhân viên</p>
+							</a></li>
+							<li class="nav-item"><a
+								href="/quantri/baocaothongkenhanvientheophongban" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Nhân viên theo phòng ban</p>
+							</a></li>
+							<li class="nav-item"><a
+								href="/quantri/baocaothongkenhanvientheochucvu" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Nhân viên theo chức vụ</p>
+							</a></li>
+							<li class="nav-item"><a
+								href="/quantri/baocaothongkenhanvientheochuyenganh" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Nhân viên theo chuyên ngành</p>
+							</a></li>
+							<li class="nav-item"><a
+								href="/quantri/baocaothongkenhanvientheotrinhdo" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Nhân viên theo trình độ</p>
+							</a></li>
+							<li class="nav-item"><a
+								href="/quantri/baocaothongkeluongtheothang" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Lương theo tháng</p>
+							</a></li>
+							<li class="nav-item"><a
+								href="/quantri/baocaothongkeluongtheophongban" class="nav-link"> <i
+									class="far fa-circle nav-icon"></i>
+									<p>Lương theo phòng ban</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/baocaothongkeluongtheochucvu"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Lương theo chức vụ</p>
+							</a></li>
+						</ul></li>
+					<li class="nav-item has-treeview"><a href="" class="nav-link">
+							<i class="nav-icon fas fa-edit"></i>
+							<p>
+								Quản lý lương <i class="fas fa-angle-left right"></i>
+							</p>
+					</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item"><a href="/quantri/findallphucapnhanvien"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Phụ cấp nhân viên</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findalltamung"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Tạm ứng nhân viên</p>
+							</a></li>
+							<li class="nav-item"><a href="/quantri/findallbangluong"
+								class="nav-link"> <i class="far fa-circle nav-icon"></i>
+									<p>Tính lương</p>
+							</a></li>
+						</ul></li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+	<footer th:fragment="footer" class="main-footer">
+		<strong>Copyright &copy; 2014-2019 <a
+			href="http://adminlte.io">AdminLTE.io</a>.
+		</strong> All rights reserved.
+		<div class="float-right d-none d-sm-inline-block">
+			<b>Version</b> 3.0.0-rc.1
+		</div>
+	</footer>
+</body>
+</html>
